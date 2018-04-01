@@ -7,11 +7,11 @@ import top.klovis.aop.service.DemoService;
 /**
  * Created by klovis on 2018/4/1.
  */
-@Service("demoAnnotationService")
+@Service(value = "demoAnnotationService")
 public class DemoAnnotationServiceImpl implements DemoService {
-    @Action(name = "哈哈哈，我是哪吒！")
+    @Action(name = "注解式拦截的add操作")
     @Override
-    public void add () {
-        System.out.println("[service] DemoAnnotationService.add()");
+    public void add() {
+        System.out.println("[service annotation] add");
     }
 }

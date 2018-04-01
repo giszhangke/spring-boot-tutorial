@@ -20,24 +20,24 @@ import java.lang.reflect.Method;
 @Component
 public class LogAspect {
 
-    @Pointcut("@annotation(top.klovis.aop.annotation.Action)")
-    public void annotationLog() {}
+    @Pointcut("execution(public * top.klovis.aop.service.impl.*.*(..))")
+    public void methodLog () {}
 
-    @Pointcut("execution(public * top.klovis.aop.service.*.*(..))")
-    public void methodLog() {}
+    @Pointcut("@annotation(top.klovis.aop.annotation.Action)")
+    public void annotationLog () {}
 
     @Before("methodLog()")
-    public void doBefore(JoinPoint joinPoint) {
+    public void doBefore (JoinPoint joinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
-        System.out.println("[methodAspect] " + method.getName() + " doBefore");
+        System.out.println("[aspect method doBefore] " + method.getName());
     }
 
     @After("annotationLog()")
-    public void doAfter(JoinPoint joinPoint) {
+    public void doAfter (JoinPoint joinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
         Action action = method.getAnnotation(Action.class);
-        System.out.println("[annotationAspect] " + action.name() + " doAfter ");
+        System.out.println("[aspect annotation doAfter] " + action.name());
     }
 }
