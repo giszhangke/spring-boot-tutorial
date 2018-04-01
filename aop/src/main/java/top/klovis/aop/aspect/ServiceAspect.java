@@ -18,7 +18,7 @@ import java.lang.reflect.Method;
 @Aspect
 @Order(1)
 @Component
-public class LogAspect {
+public class ServiceAspect {
 
     @Pointcut("execution(public * top.klovis.aop.service.impl.*.*(..))")
     public void methodLog () {}
@@ -30,7 +30,7 @@ public class LogAspect {
     public void doBefore (JoinPoint joinPoint) throws Throwable {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
-        System.out.println("[aspect method doBefore] " + method.getName());
+        System.out.println("[ServiceAspect method doBefore] " + method.getName());
     }
 
     @After("annotationLog()")
@@ -38,6 +38,6 @@ public class LogAspect {
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
         Method method = methodSignature.getMethod();
         Action action = method.getAnnotation(Action.class);
-        System.out.println("[aspect annotation doAfter] " + action.name());
+        System.out.println("[ServiceAspect annotation doAfter] " + action.name());
     }
 }
