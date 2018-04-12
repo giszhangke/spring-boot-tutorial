@@ -36,7 +36,7 @@ public class ControllerAspect {
         HttpServletRequest request = attributes.getRequest();
         String requestURL = request.getRequestURL().toString();
         String requestMethod = request.getMethod();
-        String ip = request.getRemoteAddr();
+        String ip = request.getRemoteAddr(); // TODO 获取真实的远程客户端IP
         String classMethod = joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
         String argsStr = Arrays.toString(joinPoint.getArgs());
 
