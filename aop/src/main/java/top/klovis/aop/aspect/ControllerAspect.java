@@ -9,6 +9,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import top.klovis.aop.utils.HttpUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -36,7 +37,8 @@ public class ControllerAspect {
         HttpServletRequest request = attributes.getRequest();
         String requestURL = request.getRequestURL().toString();
         String requestMethod = request.getMethod();
-        String ip = request.getRemoteAddr(); // TODO 获取真实的远程客户端IP
+        // String ip = request.getRemoteAddr();
+        String ip = HttpUtils.getIpAddress(request);
         String classMethod = joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
         String argsStr = Arrays.toString(joinPoint.getArgs());
 
