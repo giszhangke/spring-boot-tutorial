@@ -21,6 +21,7 @@
 	<modules>
 		<module>aop</module>
         <module>log</module>
+		<module>serializer</module>
 	</modules>
 
 	<properties>
