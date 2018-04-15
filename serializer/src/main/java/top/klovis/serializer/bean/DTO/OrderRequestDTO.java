@@ -12,7 +12,7 @@ import top.klovis.serializer.utils.OrderRequestContentSerializer;
  * @create: 2018-04-14 10:28
  **/
 @Data
-public class OrderRequestDTO extends BaseDTO {
+public class OrderRequestDTO {
     @JsonSerialize(using = OrderRequestContentSerializer.class)
     private OrderRequestContent content;
 }

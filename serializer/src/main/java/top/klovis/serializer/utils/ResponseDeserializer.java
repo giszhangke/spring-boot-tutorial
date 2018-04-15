@@ -21,6 +21,9 @@ public class ResponseDeserializer<T extends BaseDTOContent> extends JsonDeserial
     @Autowired
     private ObjectMapper objectMapper;
 
+    /**
+     * 用静态字段把Spring框架注入的对象存储起来，防止释放掉
+     */
     @PostConstruct
     public void init() {
         OBJECT_MAPPER = objectMapper;
@@ -33,7 +36,9 @@ public class ResponseDeserializer<T extends BaseDTOContent> extends JsonDeserial
     @Override
     public T deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
         String json = jsonParser.getText();
-        OBJECT_MAPPER.readValue(json, getClazz());
-        return null;
+        String wrapper = "WRAPPER";
+        json = json.substring(wrapper.length(), json.length() - wrapper.length());
+        System.out.println("[deserialize json]" + json);
+        return (T) OBJECT_MAPPER.readValue(json, getClazz());
     }
 }
