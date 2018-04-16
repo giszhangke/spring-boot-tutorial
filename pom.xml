@@ -22,6 +22,7 @@
 		<module>aop</module>
 		<module>cache</module>
         <module>log</module>
+		<module>profile</module>
 		<module>serializer</module>
 	</modules>
 
