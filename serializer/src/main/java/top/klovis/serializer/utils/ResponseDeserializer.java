@@ -29,6 +29,11 @@ public class ResponseDeserializer<T extends BaseDTOContent> extends JsonDeserial
         OBJECT_MAPPER = objectMapper;
     }
 
+    /**
+     * 获取泛型的实际类型
+     * 子类重写
+     * @return
+     */
     public Class<?> getClazz() {
         return null;
     }

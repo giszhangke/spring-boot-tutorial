@@ -24,15 +24,22 @@
 	</properties>
 
 	<dependencies>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
 	</dependencies>
 
+	<!-- 1. 多环境配置profiles -->
+    <!--    在执行mvn命令的时候带上-Ppro就代表生产环境，就会加载生产环境的properties，-Pdev就代表开发环境（默认) -->
 	<profiles>
 		<profile>
 			<id>dev</id>
 			<properties>
 				<activatedProperties>dev</activatedProperties>
 			</properties>
+			<!-- 设置默认值为dev -->
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
@@ -52,6 +59,29 @@
 	</profiles>
 
 	<build>
+        <!--这个元素描述了项目相关的所有资源路径列表，例如和项目相关的属性文件，这些资源被包含在最终的打包文件里。-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!-- 排除标签 -->
+                <!-- 排除不满足过滤条件的配置文件 -->
+                <excludes>
+                    <exclude>env/**/*.properties</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/env/${activatedProperties}</directory>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <filtering>true</filtering>
+                <!-- 包含orm mapper文件 -->
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
