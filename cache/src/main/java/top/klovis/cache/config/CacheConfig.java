@@ -35,7 +35,8 @@ public class CacheConfig {
         for (Cache item : Cache.values()) {
             CaffeineCache caffeineCache = new CaffeineCache(
                     item.name(),
-                    Caffeine.newBuilder().recordStats()
+                    Caffeine.newBuilder()
+                            .recordStats()
                             .expireAfterWrite(item.getTtl(), item.getTimeUnit())
                             .maximumSize(item.getMaxSize()).build()
             );
@@ -47,8 +48,8 @@ public class CacheConfig {
     }
 
     public enum Cache {
-        TOKEN(7200),
-        TICKET(7200);
+        TOKEN(60),
+        TICKET(10);
         private int maxSize = DEFAULT_MAX_SIZE;
         private int ttl = DEFAULT_TTL;
         private TimeUnit timeUnit = TIME_UNIT;
