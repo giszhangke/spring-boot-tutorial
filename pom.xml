@@ -23,6 +23,7 @@
 		<module>cache</module>
         <module>log</module>
 		<module>profile</module>
+		<module>security</module>
 		<module>serializer</module>
 	</modules>
 

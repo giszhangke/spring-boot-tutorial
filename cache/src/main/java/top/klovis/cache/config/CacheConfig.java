@@ -26,27 +26,6 @@ public class CacheConfig {
     public static final int DEFAULT_TTL = 10;
     public static final TimeUnit TIME_UNIT = TimeUnit.SECONDS;
 
-    @Bean
-    @Primary
-    public CacheManager caffeineCacheManager() {
-        SimpleCacheManager cacheManager = new SimpleCacheManager();
-        List<CaffeineCache> caches = new ArrayList<>();
-
-        for (Cache item : Cache.values()) {
-            CaffeineCache caffeineCache = new CaffeineCache(
-                    item.name(),
-                    Caffeine.newBuilder()
-                            .recordStats()
-                            .expireAfterWrite(item.getTtl(), item.getTimeUnit())
-                            .maximumSize(item.getMaxSize()).build()
-            );
-            caches.add(caffeineCache);
-        }
-
-        cacheManager.setCaches(caches);
-        return cacheManager;
-    }
-
     public enum Cache {
         TOKEN(60),
         TICKET(10);
@@ -83,4 +62,27 @@ public class CacheConfig {
             return timeUnit;
         }
     }
+
+    @Bean
+    @Primary
+    public CacheManager caffeineCacheManager() {
+        SimpleCacheManager cacheManager = new SimpleCacheManager();
+        List<CaffeineCache> caches = new ArrayList<>();
+
+        for (Cache item : Cache.values()) {
+            CaffeineCache caffeineCache = new CaffeineCache(
+                    item.name(),
+                    Caffeine.newBuilder()
+                            .recordStats()
+                            .expireAfterWrite(item.getTtl(), item.getTimeUnit())
+                            .maximumSize(item.getMaxSize()).build()
+            );
+            caches.add(caffeineCache);
+        }
+
+        cacheManager.setCaches(caches);
+        return cacheManager;
+    }
+
+
 }
