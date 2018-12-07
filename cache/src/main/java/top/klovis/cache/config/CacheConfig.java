@@ -28,7 +28,7 @@ public class CacheConfig {
 
     public enum Cache {
         TOKEN(60),
-        TICKET(10);
+        TICKET(100);
         private int maxSize = DEFAULT_MAX_SIZE;
         private int ttl = DEFAULT_TTL;
         private TimeUnit timeUnit = TIME_UNIT;

@@ -30,6 +30,11 @@ public class IndexServiceImpl implements IndexService {
      *
      *  通过注解来实现缓存时，方法内部可以专注于业务的处理，而不需要关注缓存相关的操作
      *
+     *  注意：
+     *  Only external method calls coming in through the proxy are intercepted.
+     *  This means that self-invocation, in effect, a method within the target object calling another method of the target object,
+     *  will not lead to an actual cache interception at runtime even if the invoked method is marked with @Cacheable.
+     *
      */
 
     @Override
@@ -41,8 +46,10 @@ public class IndexServiceImpl implements IndexService {
         return token;
     }
 
-    @Cacheable(value = "TICKET")
+    @Override
+    @Cacheable(value = "TICKET", sync = true)
     public int getTicket() {
+        System.out.println("calculate ticket");
         return CURRENT_TICKET++;
     }
 }
