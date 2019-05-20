@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name:
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&useSSL=true
+    username: root
+    password: ainsurtech
+  jpa:
+    database: MYSQL
+    show-sql: true
+#    hibernate:
+#      ddl-auto : update
+#      naming-strategy : org.hibernate.cfg.ImprovedNamingStrategy
+#    properties:
+#      hibernate:
+#        dialect : org.hibernate.dialect.MySQL5Dialect
